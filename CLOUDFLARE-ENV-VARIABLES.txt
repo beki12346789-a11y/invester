@@ -1,0 +1,61 @@
+═══════════════════════════════════════════════════════════════
+CLOUDFLARE PAGES SETTINGS - DO THESE
+═══════════════════════════════════════════════════════════════
+
+Go to: https://dash.cloudflare.com
+Workers & Pages → invester
+
+═══════════════════════════════════════════════════════════════
+PART 1: FIX BUILD SETTINGS
+═══════════════════════════════════════════════════════════════
+
+Settings → Builds & deployments → Edit configuration
+
+Change to:
+
+Framework preset: Next.js (from dropdown - NOT Wrangler!)
+
+Build command:
+cd frontend && npm install && npm run build
+
+Build output directory:
+frontend/out
+
+Root directory:
+/
+
+Click "Save"
+
+═══════════════════════════════════════════════════════════════
+PART 2: ADD ENVIRONMENT VARIABLES
+═══════════════════════════════════════════════════════════════
+
+Settings → Environment variables → Add variables → Production
+
+ADD THESE 2 VARIABLES:
+
+───────────────────────────────────────────────────────────────
+1. NEXT_PUBLIC_API_URL
+───────────────────────────────────────────────────────────────
+Value: YOUR_RENDER_BACKEND_URL
+
+(Get from Render dashboard - looks like: https://invester-abc.onrender.com)
+(No trailing slash!)
+
+───────────────────────────────────────────────────────────────
+2. NODE_VERSION
+───────────────────────────────────────────────────────────────
+18
+
+═══════════════════════════════════════════════════════════════
+PART 3: RETRY DEPLOYMENT
+═══════════════════════════════════════════════════════════════
+
+1. Go to: Deployments tab
+2. Find the failed deployment
+3. Click "Retry deployment"
+4. Wait 5 minutes
+
+Your site will be live at: https://invester.pages.dev
+
+═══════════════════════════════════════════════════════════════

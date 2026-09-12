@@ -1,0 +1,58 @@
+═══════════════════════════════════════════════════════════════
+RENDER ENVIRONMENT VARIABLES - COPY THESE
+═══════════════════════════════════════════════════════════════
+
+Go to: https://dashboard.render.com
+Click your service → Environment tab → Add Environment Variable
+
+ADD THESE 6 VARIABLES:
+
+───────────────────────────────────────────────────────────────
+1. DATABASE_URL
+───────────────────────────────────────────────────────────────
+Get from Nhost:
+- Go to https://app.nhost.io
+- Click your project
+- Database → Connection String
+- Copy the FULL string (includes password)
+
+Example format:
+postgres://postgres:YOUR-PASSWORD@rkigtlwslkgtgprskmvj.db.eu-central-1.nhost.run:5432/rkigtlwslkgtgprskmvj
+
+───────────────────────────────────────────────────────────────
+2. PORT
+───────────────────────────────────────────────────────────────
+8080
+
+───────────────────────────────────────────────────────────────
+3. JWT_SECRET
+───────────────────────────────────────────────────────────────
+my-super-secret-jwt-key-minimum-32-characters-long-change-in-production-123456789
+
+───────────────────────────────────────────────────────────────
+4. ADMIN_PHONE
+───────────────────────────────────────────────────────────────
+0912345678
+
+───────────────────────────────────────────────────────────────
+5. ADMIN_PASSWORD
+───────────────────────────────────────────────────────────────
+admin123
+
+───────────────────────────────────────────────────────────────
+6. ADMIN_NAME
+───────────────────────────────────────────────────────────────
+System Administrator
+
+═══════════════════════════════════════════════════════════════
+AFTER ADDING ALL 6:
+═══════════════════════════════════════════════════════════════
+
+1. Click "Save Changes"
+2. Render will auto-redeploy (wait 2-3 minutes)
+3. Check logs - should see "Connected to database successfully"
+4. Copy your backend URL (like: https://invester-abc.onrender.com)
+
+You'll need this URL for Cloudflare in the next step!
+
+═══════════════════════════════════════════════════════════════

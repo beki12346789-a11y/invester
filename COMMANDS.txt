@@ -1,0 +1,77 @@
+=================================================================
+🎯 EXACT COMMANDS TO RUN - COPY AND PASTE
+=================================================================
+
+STEP 1: FIX GITHUB PUSH (Choose ONE option)
+───────────────────────────────────────────
+
+OPTION A: Using GitHub CLI (Recommended)
+─────────────────────────────────────────
+gh auth login
+gh repo create invester --public --source=. --remote=origin --push
+
+
+OPTION B: Using New Token
+──────────────────────────
+# First, get new token from: https://github.com/settings/tokens/new
+# Select scopes: repo + workflow
+# Copy the token, then run:
+
+git remote remove origin
+git remote add origin https://YOUR_NEW_TOKEN_HERE@github.com/beki12346789-a11y/invester.git
+git push -u origin main
+
+
+OPTION C: Using Helper Script
+──────────────────────────────
+./setup-github.sh
+# Follow the interactive prompts
+
+
+=================================================================
+
+STEP 2: VERIFY GITHUB PUSH WORKED
+──────────────────────────────────
+git remote -v
+# Should show: origin https://github.com/beki12346789-a11y/invester.git
+
+# Check on GitHub:
+# Visit: https://github.com/beki12346789-a11y/invester
+# You should see your code!
+
+
+=================================================================
+
+STEP 3: OPEN DEPLOYMENT GUIDES
+───────────────────────────────
+cat START-HERE.md        # Start here
+cat QUICKSTART.md        # Follow this for deployment
+cat DEPLOYMENT.md        # Detailed reference
+
+
+=================================================================
+
+QUICK REFERENCE:
+────────────────
+Your GitHub Repo: https://github.com/beki12346789-a11y/invester
+Your Telegram:    https://t.me/+yLNR6hcimS04Njc0
+
+Admin Credentials:
+  Phone:    0912345678
+  Password: admin123
+  ⚠️ Change this in production!
+
+
+=================================================================
+
+DEPLOYMENT SERVICES NEEDED:
+───────────────────────────
+1. Render.com  (Backend + Database) - Sign up: https://render.com/register
+2. Vercel      (Frontend)           - Sign up: https://vercel.com/signup
+
+
+=================================================================
+
+🎉 THAT'S IT! After GitHub push works, follow QUICKSTART.md for
+   30-minute deployment to get your platform live!
+=================================================================

@@ -127,24 +127,27 @@ NEXT_PUBLIC_API_URL=http://localhost:8080
 
 ## Deployment
 
-### Frontend (Vercel/Netlify)
-1. Connect your GitHub repository
-2. Set build command: `cd frontend && npm run build`
-3. Set output directory: `frontend/.next`
-4. Add environment variables
+### Database (Nhost)
+1. Create account at https://app.nhost.io
+2. Create new project
+3. Run migrations using SQL Editor
+4. Copy connection string
 
 ### Backend (Render.com)
 1. Create new Web Service
 2. Connect GitHub repository
 3. Build command: `cd backend && go build -o server cmd/server/main.go`
 4. Start command: `./backend/server`
-5. Add environment variables
+5. Add environment variables (including Nhost DATABASE_URL)
 
-### Database (Render.com/Railway)
-1. Create PostgreSQL instance
-2. Run migrations from `database/schema.sql`
-3. Run seed data from `database/seed.sql`
-4. Update backend DATABASE_URL
+### Frontend (Vercel)
+1. Import GitHub repository
+2. Root directory: `frontend`
+3. Framework: Next.js
+4. Add NEXT_PUBLIC_API_URL environment variable
+5. Deploy
+
+**Full deployment guide**: See `DEPLOY-NHOST.md`
 
 ## Features Roadmap
 

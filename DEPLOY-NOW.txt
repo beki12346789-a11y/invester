@@ -1,0 +1,164 @@
+═══════════════════════════════════════════════════════════════
+DEPLOYMENT INSTRUCTIONS - DO THESE STEPS NOW
+═══════════════════════════════════════════════════════════════
+
+Your Nhost connection:
+postgres://postgres:[PASSWORD]@rkigtlwslkgtgprskmvj.db.eu-central-1.nhost.run:5432/rkigtlwslkgtgprskmvj
+
+═══════════════════════════════════════════════════════════════
+STEP 1: SETUP NHOST DATABASE (Do this first!)
+═══════════════════════════════════════════════════════════════
+
+1. Go to: https://app.nhost.io
+
+2. Find your project: rkigtlwslkgtgprskmvj
+
+3. Click: Database → SQL Editor
+
+4. Copy ALL content from file: database/schema.sql
+
+5. Paste into SQL Editor and click "Run"
+
+6. Copy ALL content from file: database/seed.sql
+
+7. Paste into SQL Editor and click "Run"
+
+8. Click: Database → Connection String
+
+9. Copy the FULL string (it includes your password)
+
+═══════════════════════════════════════════════════════════════
+STEP 2: FIX RENDER BACKEND (Do this second!)
+═══════════════════════════════════════════════════════════════
+
+Your error: "dial tcp [::1]:5432: connection refused"
+Reason: No DATABASE_URL set
+
+1. Go to: https://dashboard.render.com
+
+2. Find your service (should be called "invester" or similar)
+
+3. Click on it
+
+4. Click: Environment (left menu)
+
+5. Add these variables (click "Add Environment Variable" for each):
+
+   Key: DATABASE_URL
+   Value: [Paste the FULL Nhost connection string from Step 1]
+   
+   Key: PORT
+   Value: 8080
+   
+   Key: JWT_SECRET
+   Value: super-secret-jwt-key-change-this-in-production-min-32-characters
+   
+   Key: ADMIN_PHONE
+   Value: 0912345678
+   
+   Key: ADMIN_PASSWORD
+   Value: admin123
+   
+   Key: ADMIN_NAME
+   Value: System Administrator
+
+6. Click: "Save Changes"
+
+7. Render will auto-redeploy (wait 2-3 minutes)
+
+8. Check logs - should see: "Connected to database successfully"
+
+9. Copy your backend URL: https://[your-service-name].onrender.com
+
+═══════════════════════════════════════════════════════════════
+STEP 3: FIX CLOUDFLARE PAGES FRONTEND (Do this last!)
+═══════════════════════════════════════════════════════════════
+
+Your error: "npx wrangler deploy" - Wrong framework!
+Reason: Using Wrangler (for Workers) instead of Next.js
+
+1. Go to: https://dash.cloudflare.com
+
+2. Click: Pages (left menu)
+
+3. Find: invester
+
+4. Click: Settings → Builds & deployments
+
+5. Scroll to: "Build configurations"
+
+6. Click: "Edit configurations"
+
+7. Change these settings:
+
+   Framework preset: Next.js (NOT Wrangler/Workers!)
+   
+   Build command:
+   cd frontend && npm install && npm run build
+   
+   Build output directory:
+   frontend/out
+   
+   Root directory:
+   /
+
+8. Click: "Save"
+
+9. Go to: Settings → Environment variables
+
+10. Add production variable:
+
+    Variable name: NEXT_PUBLIC_API_URL
+    Variable value: [Paste your Render backend URL from Step 2]
+    
+    Variable name: NODE_VERSION
+    Variable value: 18
+
+11. Click: "Save"
+
+12. Go to: Deployments
+
+13. Click: "Retry deployment" on the failed build
+
+14. Wait 3-5 minutes for build
+
+15. Your site will be live at: https://invester.pages.dev
+
+═══════════════════════════════════════════════════════════════
+VERIFICATION
+═══════════════════════════════════════════════════════════════
+
+After all deployments succeed:
+
+1. Open: https://invester.pages.dev
+
+2. Click: Register
+
+3. Use phone: 0923456789
+
+4. Check wallet shows: 100 Birr welcome bonus
+
+5. Test admin login:
+   Phone: 0912345678
+   Password: admin123
+
+═══════════════════════════════════════════════════════════════
+IF YOU GET ERRORS:
+═══════════════════════════════════════════════════════════════
+
+Render backend still failing:
+- Double-check DATABASE_URL is the FULL string with password
+- Verify all 6 environment variables are added
+- Check Render logs for specific error
+
+Cloudflare build still failing:
+- Make sure Framework preset is "Next.js" not "Wrangler"
+- Verify build command includes "cd frontend"
+- Check NODE_VERSION is set to 18
+
+Frontend can't reach backend:
+- Verify NEXT_PUBLIC_API_URL has no trailing slash
+- Check backend is running (green in Render dashboard)
+- Open browser console to see actual error
+
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,33 @@
+services:
+  # Backend API Service
+  - type: web
+    name: investment-backend
+    env: go
+    region: oregon
+    plan: free
+    buildCommand: cd backend && go build -o server cmd/server/main.go
+    startCommand: ./backend/server
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: investment-db
+          property: connectionString
+      - key: ADMIN_PHONE
+        value: 0912345678
+      - key: ADMIN_PASSWORD
+        value: admin123
+      - key: ADMIN_NAME
+        value: System Administrator
+    healthCheckPath: /api/health
+
+databases:
+  - name: investment-db
+    databaseName: investment_platform
+    user: postgres
+    plan: free
+    region: oregon
+    postgresMajorVersion: 14

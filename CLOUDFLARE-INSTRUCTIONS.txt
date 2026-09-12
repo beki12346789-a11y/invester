@@ -1,0 +1,62 @@
+═══════════════════════════════════════════════════════════════
+CLOUDFLARE PAGES - FINAL STEP
+═══════════════════════════════════════════════════════════════
+
+After Render backend is deployed, do this:
+
+STEP 1: GET YOUR RENDER BACKEND URL
+───────────────────────────────────────────────────────────────
+
+From Render dashboard, copy your backend URL.
+Example: https://investment-backend-xyz.onrender.com
+
+───────────────────────────────────────────────────────────────
+STEP 2: CONFIGURE CLOUDFLARE
+───────────────────────────────────────────────────────────────
+
+1. Go to: https://dash.cloudflare.com
+
+2. Workers & Pages → invester
+
+3. Settings → Builds & deployments
+
+4. Edit configuration:
+
+   Framework preset: Next.js
+   Build command: cd frontend && npm install && npm run build
+   Build output directory: frontend/out
+   Root directory: /
+
+5. Save
+
+6. Settings → Environment variables → Add (Production):
+
+   NEXT_PUBLIC_API_URL = [YOUR_RENDER_URL_HERE]
+   NODE_VERSION = 18
+
+7. Save
+
+8. Deployments → Retry deployment
+
+9. Wait 5 minutes
+
+10. Done! Site live at: https://invester.pages.dev
+
+═══════════════════════════════════════════════════════════════
+TEST YOUR APP
+═══════════════════════════════════════════════════════════════
+
+1. Open: https://invester.pages.dev
+
+2. Click "Register"
+   Phone: 0923456789
+   Password: test123
+   Name: Test User
+
+3. Login - should see 100 Birr welcome bonus
+
+4. Admin login:
+   Phone: 0912345678
+   Password: admin123
+
+═══════════════════════════════════════════════════════════════

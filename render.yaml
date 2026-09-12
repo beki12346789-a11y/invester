@@ -13,9 +13,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_URL
-        fromDatabase:
-          name: investment-db
-          property: connectionString
+        value: postgres://postgres:hylemakidertin2A%40@rkigtlwslkgtgprskmvj.db.eu-central-1.nhost.run:5432/rkigtlwslkgtgprskmvj
       - key: ADMIN_PHONE
         value: 0912345678
       - key: ADMIN_PASSWORD
@@ -23,11 +21,3 @@ services:
       - key: ADMIN_NAME
         value: System Administrator
     healthCheckPath: /api/health
-
-databases:
-  - name: investment-db
-    databaseName: investment_platform
-    user: postgres
-    plan: free
-    region: oregon
-    postgresMajorVersion: 14

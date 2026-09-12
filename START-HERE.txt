@@ -1,61 +1,47 @@
 ═══════════════════════════════════════════════════════════════
-CLOUDFLARE PAGES SETTINGS - DO THESE
+🚀 DEPLOYMENT - START HERE
 ═══════════════════════════════════════════════════════════════
 
-Go to: https://dash.cloudflare.com
-Workers & Pages → invester
+✅ Everything is configured in code!
+✅ render.yaml has your database password
+✅ All environment variables are set
+✅ GitHub repo is ready
 
 ═══════════════════════════════════════════════════════════════
-PART 1: FIX BUILD SETTINGS
+DO THESE 2 STEPS:
 ═══════════════════════════════════════════════════════════════
 
-Settings → Builds & deployments → Edit configuration
+STEP 1: RENDER (5 minutes)
+───────────────────────────────────────────────────────────────
 
-Change to:
+Open file: RENDER-INSTRUCTIONS.txt
 
-Framework preset: Next.js (from dropdown - NOT Wrangler!)
+Go to Render dashboard and use Blueprint to auto-deploy.
+Everything will be configured automatically from render.yaml!
 
-Build command:
-cd frontend && npm install && npm run build
-
-Build output directory:
-frontend/out
-
-Root directory:
-/
-
-Click "Save"
-
-═══════════════════════════════════════════════════════════════
-PART 2: ADD ENVIRONMENT VARIABLES
-═══════════════════════════════════════════════════════════════
-
-Settings → Environment variables → Add variables → Production
-
-ADD THESE 2 VARIABLES:
+After deployment, copy your backend URL.
 
 ───────────────────────────────────────────────────────────────
-1. NEXT_PUBLIC_API_URL
+STEP 2: CLOUDFLARE (5 minutes)
 ───────────────────────────────────────────────────────────────
-Value: YOUR_RENDER_BACKEND_URL
 
-(Get from Render dashboard - looks like: https://invester-abc.onrender.com)
-(No trailing slash!)
+Open file: CLOUDFLARE-INSTRUCTIONS.txt
 
-───────────────────────────────────────────────────────────────
-2. NODE_VERSION
-───────────────────────────────────────────────────────────────
-18
+1. Fix build settings (Framework: Next.js)
+2. Add 2 environment variables
+3. Retry deployment
+
+Done!
 
 ═══════════════════════════════════════════════════════════════
-PART 3: RETRY DEPLOYMENT
+YOUR APP WILL BE LIVE AT:
 ═══════════════════════════════════════════════════════════════
 
-1. Go to: Deployments tab
-2. Find the failed deployment
-3. Click "Retry deployment"
-4. Wait 5 minutes
+Frontend: https://invester.pages.dev
+Backend: https://investment-backend-[xxx].onrender.com
 
-Your site will be live at: https://invester.pages.dev
+Admin Login:
+Phone: 0912345678
+Password: admin123
 
 ═══════════════════════════════════════════════════════════════

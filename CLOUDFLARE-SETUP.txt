@@ -1,0 +1,29 @@
+CLOUDFLARE PAGES DEPLOYMENT FIX
+================================
+
+YOUR ERROR: Build failed - using wrong settings (Wrangler instead of Next.js)
+
+FIX IN CLOUDFLARE DASHBOARD:
+-----------------------------
+
+Go to: https://dash.cloudflare.com → Pages → invester → Settings → Builds & deployments
+
+CHANGE BUILD SETTINGS:
+
+Framework preset: Next.js (not Wrangler/Workers)
+
+Build command:
+cd frontend && npm install && npm run build
+
+Build output directory:
+frontend/out
+
+Root directory:
+/
+
+ADD ENVIRONMENT VARIABLES (Settings → Environment variables):
+
+NEXT_PUBLIC_API_URL = https://your-backend-name.onrender.com
+NODE_VERSION = 18
+
+After saving: Click "Retry deployment"

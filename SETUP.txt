@@ -1,0 +1,34 @@
+DEPLOYMENT CHECKLIST
+====================
+
+Stack: Nhost (database) + Render (backend) + Cloudflare Pages (frontend)
+
+STEP 1: NHOST DATABASE
+-----------------------
+1. Go to: https://app.nhost.io
+2. Open your project
+3. Go to Database → SQL Editor
+4. Run database/schema.sql (creates tables)
+5. Run database/seed.sql (adds initial data)
+6. Copy connection string from Database → Connection String
+
+STEP 2: RENDER BACKEND
+-----------------------
+1. Go to: https://dashboard.render.com
+2. Open your service
+3. Go to Environment tab
+4. Add variables (see RENDER-SETUP.txt)
+5. Use Nhost connection string for DATABASE_URL
+6. Wait for auto-redeploy
+7. Copy backend URL (e.g., https://invester-abc123.onrender.com)
+
+STEP 3: CLOUDFLARE PAGES FRONTEND
+-----------------------------------
+1. Go to: https://dash.cloudflare.com
+2. Pages → invester → Settings → Builds & deployments
+3. Fix build settings (see CLOUDFLARE-SETUP.txt)
+4. Add NEXT_PUBLIC_API_URL with Render backend URL
+5. Add NODE_VERSION = 18
+6. Retry deployment
+
+DONE! Your app will be live at https://invester.pages.dev

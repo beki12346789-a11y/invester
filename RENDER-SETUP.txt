@@ -1,0 +1,36 @@
+RENDER BACKEND DEPLOYMENT FIX
+==============================
+
+YOUR ERROR: Failed to ping database - dial tcp [::1]:5432: connection refused
+
+CAUSE: Missing DATABASE_URL environment variable
+
+FIX IN RENDER DASHBOARD:
+-------------------------
+
+Go to: https://dashboard.render.com → Your service → Environment
+
+ADD THESE ENVIRONMENT VARIABLES:
+
+DATABASE_URL = postgres://postgres:[YOUR-PASSWORD]@rkigtlwslkgtgprskmvj.db.eu-central-1.nhost.run:5432/rkigtlwslkgtgprskmvj
+
+PORT = 8080
+
+JWT_SECRET = your-random-secret-key-min-32-chars
+
+ADMIN_PHONE = 0912345678
+
+ADMIN_PASSWORD = admin123
+
+ADMIN_NAME = System Administrator
+
+Get Nhost password: https://app.nhost.io → Database → Connection String
+
+After adding: Service will auto-redeploy (2-3 minutes)
+
+Then run SQL on Nhost to setup tables:
+1. Go to Nhost → Database → SQL Editor
+2. Copy/paste database/schema.sql
+3. Run it
+4. Copy/paste database/seed.sql
+5. Run it
